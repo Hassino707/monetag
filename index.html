@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Please Wait...</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  background:#0d0d0d;
+  font-family:Arial, sans-serif;
+  color:#fff;
+  text-align:center;
+}
+
+.container{
+  padding:40px 20px;
+}
+
+.box{
+  background:#1a1a1a;
+  padding:25px;
+  border-radius:12px;
+  max-width:350px;
+  margin:auto;
+  box-shadow:0 0 15px rgba(0,0,0,0.5);
+}
+
+h2{
+  font-size:20px;
+}
+
+.progress-bar{
+  width:100%;
+  height:8px;
+  background:#333;
+  border-radius:5px;
+  overflow:hidden;
+  margin:20px 0;
+}
+
+.progress{
+  height:100%;
+  width:0%;
+  background:#00ff99;
+  transition:width 0.3s;
+}
+
+button{
+  background:#00cc66;
+  color:#fff;
+  border:none;
+  padding:14px 25px;
+  font-size:16px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#00aa55;
+}
+
+.small{
+  font-size:12px;
+  color:#888;
+  margin-top:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+  <div class="box">
+
+    <h2 id="text">Checking your access...</h2>
+
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <button onclick="go()">Unlock Access</button>
+
+<div class="small">Verifying secure connection...</div>
+
+  </div>
+</div>
+
+<script>
+
+// ✅ GET SUBID
+let subid = new URLSearchParams(window.location.search).get("subid") || "default";
+
+// ✅ MULTI OFFER (SPLIT TEST)
+let offers = [
+  "https://omg10.com/4/10792509?subid=" + subid
+];
+
+// randomly pick one
+let selectedOffer = offers[0];
+
+
+// ✅ FAKE PROGRESS BAR
+let progress = 0;
+let bar = document.getElementById("progress");
+let text = document.getElementById("text");
+
+let interval = setInterval(() => {
+  progress += Math.random() * 8 + 5;
+
+
+  if(progress >= 100){
+    progress = 100;
+    clearInterval(interval);
+
+    text.innerHTML = "Access Granted ✔";
+    
+    // slight delay before redirect (feels natural)
+    setTimeout(go, 800);
+  }
+
+  bar.style.width = progress + "%";
+
+}, 500);
+
+
+// ✅ ANTI-ADBLOCK DETECTION
+function detectAdBlock(){
+  let ad = document.createElement('div');
+  ad.innerHTML = "&nbsp;";
+  ad.className = "adsbox";
+  document.body.appendChild(ad);
+
+  setTimeout(function(){
+    if(ad.offsetHeight === 0){
+      // AdBlock detected → redirect differently
+      window.location.href = "https://omg10.com/4/10792509?subid=" + subid;
+    }
+    ad.remove();
+  }, 100);
+}
+
+detectAdBlock();
+
+
+// ✅ MAIN REDIRECT
+function go(){
+  window.location.href = selectedOffer;
+}
+
+
+// ✅ AUTO REDIRECT BACKUP
+setTimeout(go, 5000);
+
+</script>
+
+</body>
+</html>
