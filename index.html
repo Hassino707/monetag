@@ -90,7 +90,14 @@ button:hover{
 <script>
 
 // ✅ GET SUBID
-let subid = new URLSearchParams(window.location.search).get("subid") || "default";
+let urlParams = new URLSearchParams(window.location.search);
+
+let zoneid = urlParams.get("zoneid") || "0";
+let device = urlParams.get("device") || "unknown";
+let geo = urlParams.get("geo") || "XX";
+
+let subid = zoneid + "_" + device + "_" + geo;
+
 
 // ✅ MULTI OFFER (SPLIT TEST)
 let offers = [
