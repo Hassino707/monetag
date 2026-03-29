@@ -154,7 +154,7 @@ let redirected = false;
 function go(){
   if(redirected) return;
   redirected = true;
-  window.location.href = selectedOffer;
+ window.location.replace(selectedOffer);
 }
 
 
