@@ -81,7 +81,7 @@ button:hover{
       <div class="progress" id="progress"></div>
     </div>
 
-    <button onclick="go()">Verify Now</button>
+    <button onclick="go()">CONTINUE</button>
 
 <div class="small">Verifying secure connection...</div>
 
@@ -93,15 +93,10 @@ button:hover{
 // ✅ GET SUBID
 let urlParams = new URLSearchParams(window.location.search);
 
-let zoneid = urlParams.get("zoneid") || "0";
-let device = urlParams.get("device") || "unknown";
-let geo = urlParams.get("geo") || "XX";
-
-let subid = zoneid + "_" + device + "_" + geo;
-
+let subid = new URLSearchParams(window.location.search).get("subid") || "default";
 
 // ✅ MULTI OFFER (SPLIT TEST)
-let selectedOffer = "https://omg10.com/4/10792509?subid=" + subid;
+let selectedOffer = "https://omg10.com/4/10792509&subid=" + subid;
 
 
 // ✅ FAKE PROGRESS BAR
@@ -110,7 +105,7 @@ let bar = document.getElementById("progress");
 let text = document.getElementById("text");
 
 let interval = setInterval(() => {
-  progress += Math.random() * 8 + 5;
+  progress += Math.random() * 15 + 10;
 
 
   if(progress >= 100){
@@ -138,7 +133,7 @@ function detectAdBlock(){
   setTimeout(function(){
     if(ad.offsetHeight === 0){
       // AdBlock detected → redirect differently
-     text.innerHTML = "Please disable AdBlock to continue...";
+     text.innerHTML = "Optimizing connection...";
     }
     ad.remove();
   }, 100);
@@ -165,11 +160,8 @@ function go(){
 
 // ✅ AUTO REDIRECT BACKUP
 setTimeout(() => {
-  if(progress < 100){
-    go();
-  }
-}, 7000);
-
+  go();
+}, 10000);
 
 </script>
 
