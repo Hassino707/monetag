@@ -81,7 +81,8 @@ button:hover{
       <div class="progress" id="progress"></div>
     </div>
 
-    <button onclick="go()">CONTINUE</button>
+    <button onclick="go()">UNLOCK NOW
+</button>
 
 <div class="small">Verifying secure connection...</div>
 
@@ -112,7 +113,7 @@ let interval = setInterval(() => {
     progress = 100;
     clearInterval(interval);
 
-   text.innerHTML = "Secure connection verified ✔";
+ text.innerHTML = "Connection secured ✔";
     
     // slight delay before redirect (feels natural)
     setTimeout(go, 800);
