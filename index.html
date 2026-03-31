@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Please Wait...</title>
+<title>Optimizing your connection...</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -56,6 +56,11 @@ button{
   cursor:pointer;
 }
 
+button:disabled{
+  background:#555;
+  cursor:not-allowed;
+}
+
 button:hover{
   background:#00aa55;
 }
@@ -73,18 +78,14 @@ button:hover{
 
 <div class="container">
   <div class="box">
-
-    <h2 id="text">Optimizing your connection...
-</h2>
+<h2 id="text">Optimizing your connection...</h2>
 
     <div class="progress-bar">
       <div class="progress" id="progress"></div>
     </div>
+<button id="btn">CONTINUE</button>
 
-    <button onclick="go()">UNLOCK NOW
-</button>
-
-<div class="small">Please wait while we prepare your content...</div>
+    <div class="small">Please wait while we prepare your content...</div>
 
   </div>
 </div>
@@ -92,77 +93,48 @@ button:hover{
 <script>
 
 // ✅ GET SUBID
-
-
 let subid = new URLSearchParams(window.location.search).get("subid") || "default";
 
-// ✅ MULTI OFFER (SPLIT TEST)
-let selectedOffer = "https://omg10.com/4/10792509&subid=" + subid;
+// ✅ PUT YOUR REAL MONETAG LINK HERE
+let selectedOffer = "https://omg10.com/4/10798487?subid=f3_" + subid;
 
-
-// ✅ FAKE PROGRESS BAR
+// ✅ ELEMENTS
 let progress = 0;
 let bar = document.getElementById("progress");
 let text = document.getElementById("text");
+let btn = document.getElementById("btn");
 
+// ✅ DISABLE BUTTON INITIALLY
+btn.disabled = true;
+
+// ✅ PROGRESS (FAST)
 let interval = setInterval(() => {
-  progress += Math.random() * 15 + 10;
-
+  progress += Math.random() * 20 + 10;
 
   if(progress >= 100){
     progress = 100;
     clearInterval(interval);
-
- text.innerHTML = "Connection secured ✔";
-    
-    // slight delay before redirect (feels natural)
-    setTimeout(go, 800);
+text.innerHTML = "Ready ✔ Tap continue to proceed";
+    btn.disabled = false;
   }
 
   bar.style.width = progress + "%";
+}, 300);
 
-}, 400);
-
-
-// ✅ ANTI-ADBLOCK DETECTION
-function detectAdBlock(){
-  let ad = document.createElement('div');
-  ad.innerHTML = "&nbsp;";
-  ad.className = "adsbox";
-  document.body.appendChild(ad);
-
-  setTimeout(function(){
-    if(ad.offsetHeight === 0){
-      // AdBlock detected → redirect differently
-     text.innerHTML = "Optimizing connection...";
-    }
-    ad.remove();
-  }, 100);
-}
-
-detectAdBlock();
-let btn = document.querySelector("button");
-btn.disabled = true;
-
-setTimeout(() => {
-  btn.disabled = false;
-}, 1200);
-
-
-// ✅ MAIN REDIRECT
+// ✅ REDIRECT FUNCTION
 let redirected = false;
 
 function go(){
   if(redirected) return;
   redirected = true;
- window.location.replace(selectedOffer);
+window.location.replace(selectedOffer);
 }
 
+// ✅ BUTTON CLICK
+btn.addEventListener("click", go);
 
-// ✅ AUTO REDIRECT BACKUP
-setTimeout(() => {
-  go();
-}, 10000);
+// ✅ AUTO REDIRECT BACKUP (6s)
+setTimeout(go, 5000);
 
 </script>
 
